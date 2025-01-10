@@ -5,7 +5,6 @@ async function loadTemplates() {
   try {
       // Fetch the templates data from the JSON file
       const response = await fetch('templates.json'); // Make sure the path is correct
-      console.log("Temp - ", response);
       const templatesData = await response.json();
 
       // Get the templates container element
@@ -14,6 +13,7 @@ async function loadTemplates() {
       // Clear any previous templates
       templatesContainer.innerHTML = '';
 
+      console.log("Temp - ", templatesData);
       // Loop through each template and create its UI
       templatesData.forEach((template) => {
           const templateCard = document.createElement('div');
