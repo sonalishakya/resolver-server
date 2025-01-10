@@ -28,27 +28,56 @@ async function populateDropdown() {
 async function renderTemplate(templateId) {
   const templates = await loadTemplates();
   const template = templates.find((tpl) => tpl.template_id === templateId);
-  const contentElement = document.getElementById('template-content');
   
-  if (contentElement && template) {
-    // Clear existing content
-    contentElement.innerHTML = '';
+  // Ensure the content element is available
+  const contentElement = document.getElementById('template-content');
+  if (!contentElement) {
+    console.error('Element #template-content not found');
+    return;
+  }
 
-    // Fetching values dynamically based on template's attributes
-    for (const [attribute, config] of Object.entries(template.definition.attribute)) {
-      const values = await fetchValuesFromUrl(config.values_url);
-      // Create dropdown or other elements based on values
-      const element = document.createElement('select');
-      values.forEach((item) => {
-        const option = document.createElement('option');
-        option.value = item.value;
-        option.textContent = item.name;
-        element.appendChild(option);
-      });
-      contentElement.appendChild(element);
-    }
+  // Clear any existing content
+  contentElement.innerHTML = '';
+
+  // Fetch values dynamically based on template's attributes
+  for (const [attribute, config] of Object.entries(template.definition.attribute)) {
+    const values = await fetchValuesFromUrl(config.values_url);
+    const selectElement = document.createElement('select');
+    
+    values.forEach((item) => {
+      const option = document.createElement('option');
+      option.value = item.value;
+      option.textContent = item.name;
+      selectElement.appendChild(option);
+    });
+
+    contentElement.appendChild(selectElement);
   }
 }
+// async function renderTemplate(templateId) {
+//   const templates = await loadTemplates();
+//   const template = templates.find((tpl) => tpl.template_id === templateId);
+//   const contentElement = document.getElementById('template-content');
+  
+//   if (contentElement && template) {
+//     // Clear existing content
+//     contentElement.innerHTML = '';
+
+//     // Fetching values dynamically based on template's attributes
+//     for (const [attribute, config] of Object.entries(template.definition.attribute)) {
+//       const values = await fetchValuesFromUrl(config.values_url);
+//       // Create dropdown or other elements based on values
+//       const element = document.createElement('select');
+//       values.forEach((item) => {
+//         const option = document.createElement('option');
+//         option.value = item.value;
+//         option.textContent = item.name;
+//         element.appendChild(option);
+//       });
+//       contentElement.appendChild(element);
+//     }
+//   }
+// }
 // async function renderTemplate(templateId) {
 //   const templates = await loadTemplates();
 //   const template = templates.find((tpl) => tpl.template_id === templateId);
