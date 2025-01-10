@@ -32,7 +32,7 @@
           "attribute": {
             "city_code": {
               "type": "string",
-              "values_url": "data/city_codes.json"
+              "value": "data/city_codes.json"
             },
             "domain": {
               "type": "string",
