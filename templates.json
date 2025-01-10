@@ -1,0 +1,118 @@
+{
+    "templates": [
+      {
+        "template_name": "Search By City",
+        "template_id": "search-by-city",
+        "base_template": {
+          "context": {
+            "ttl": "PT30S",
+            "city": "{{city_code}}",
+            "action": "search",
+            "bap_id": "{{bap_id}}",
+            "domain": "{{domain}}",
+            "bap_uri": "{{bap_uri}}",
+            "country": "{{country_code}}",
+            "timestamp": "{{timestamp}}",
+            "message_id": "{{message_id}}",
+            "core_version": "1.2.0",
+            "transaction_id": "{{transaction_id}}",
+            "bpp_id": "{{bpp_id}}",
+            "bpp_uri": "{{bpp_uri}}"
+          },
+          "message": {
+            "intent": {
+              "payment": {
+                "@ondc/org/buyer_app_finder_fee_type": "percent",
+                "@ondc/org/buyer_app_finder_fee_amount": "5"
+              }
+            }
+          }
+        },
+        "definition": {
+          "attribute": {
+            "city_code": {
+              "type": "string",
+              "value": [
+                { "name": "NEW DELHI", "value": "std:011" },
+                { "name": "SRINAGAR", "value": "std:0194" }
+              ]
+            },
+            "domain": {
+              "type": "string",
+              "value": [
+                { "name": "Grocery", "value": "ONDC:RET10" },
+                { "name": "Fashion", "value": "ONDC:RET12" }
+              ]
+            },
+            "country_code": {
+              "type": "string",
+              "value": [
+                { "name": "India", "value": "IND" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "template_name": "Search By Item Code",
+        "template_id": "search-by-item-code",
+        "base_template": {
+          "context": {
+            "ttl": "PT30S",
+            "city": "{{city_code}}",
+            "action": "search",
+            "bap_id": "{{bap_id}}",
+            "domain": "{{domain}}",
+            "bap_uri": "{{bap_uri}}",
+            "country": "{{country_code}}",
+            "timestamp": "{{timestamp}}",
+            "message_id": "{{message_id}}",
+            "core_version": "1.2.0",
+            "transaction_id": "{{transaction_id}}",
+            "bpp_id": "{{bpp_id}}",
+            "bpp_uri": "{{bpp_uri}}"
+          },
+          "message": {
+            "intent": {
+              "items": [
+                {
+                  "id": "{{item_id}}",
+                  "parent_item_id": "{{parent_item_id}}",
+                  "descriptor": {
+                    "name": "{{item_name}}",
+                    "code": "{{item_code}}"
+                  },
+                  "category_id": "{{category_id}}"
+                }
+              ],
+              "payment": {
+                "@ondc/org/buyer_app_finder_fee_type": "percent",
+                "@ondc/org/buyer_app_finder_fee_amount": "5"
+              }
+            }
+          }
+        },
+        "definition": {
+          "attribute": {
+            "city_code": {
+              "type": "string",
+              "value": [
+                { "name": "NEW DELHI", "value": "std:011" },
+                { "name": "SRINAGAR", "value": "std:0194" }
+              ]
+            },
+            "category_id": {
+              "type": "string",
+              "value": []
+            },
+            "country_code": {
+              "type": "string",
+              "value": [
+                { "name": "India", "value": "IND" }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }

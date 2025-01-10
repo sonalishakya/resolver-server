@@ -1,0 +1,184 @@
+{
+  "template_name": "Search By City",
+  "template_id": "search-by-city",
+  "base_template": {
+    "context": {
+      "ttl": "PT30S",
+      "city": "{{city_code}}",
+      "action": "search",
+      "bap_id": "{{bap_id}}",
+      "domain": "{{domain}}",
+      "bap_uri": "{{bap_uri}}",
+      "country": "{{country_code}}",
+      "timestamp": "{{timestamp}}",
+      "message_id": "{{message_id}}",
+      "core_version": "1.2.0",
+      "transaction_id": "{{transaction_id}}",
+      "bpp_id": "{{bpp_id}}",
+      "bpp_uri": "{{bpp_uri}}"
+    },
+    "message": {
+      "intent": {
+        "payment": {
+          "@ondc/org/buyer_app_finder_fee_type": "percent",
+          "@ondc/org/buyer_app_finder_fee_amount": "5"
+        }
+      }
+    }
+  },
+  "creation_prop": {
+    "optional": [],
+    "mandatory": ["domain", "city_code", "country_code"]
+  },
+  "runtime_prop": {
+    "optional": [],
+    "mandatory": [
+      "transaction_id",
+      "message_id",
+      "timestamp",
+      "bap_id",
+      "bap_uri"    
+    ]
+  },
+  "additional_prop": [
+    {
+      "key": "buyer_finder_fee_percent",
+      "value": "5"
+    }
+  ],
+  "definition": {
+    "attribute": {
+      "city_code": {
+        "type": "string",
+        "value": [
+          { "name": "NEW DELHI", "value": "std:011" },
+					{ "name": "FARIDABAD", "value": "std:0129" },
+					{ "name": "PALWAL", "value": "std:01275" },
+					{ "name": "GURUGRAM", "value": "std:0124" },
+					{ "name": "NUH", "value": "std:01267" },
+					{ "name": "REWARI", "value": "std:01274" },
+					{ "name": "MAHENDRAGARH", "value": "std:01285" },
+					{ "name": "ROHTAK", "value": "std:01262" },
+					{ "name": "JHAJJAR", "value": "std:01251" },
+					{ "name": "HISAR", "value": "std:01662" },
+					{ "name": "FATEHABAD", "value": "std:01667" },
+					{ "name": "SIRSA", "value": "std:05334" },
+					{ "name": "JIND", "value": "std:01681" },
+					{ "name": "BHIWANI", "value": "std:01664" },
+					{ "name": "CHARKI DADRI", "value": "std:01250" },
+					{ "name": "SONIPAT", "value": "std:0130" },
+					{ "name": "KARNAL", "value": "std:0184" },
+					{ "name": "PANIPAT", "value": "std:0180" },
+					{ "name": "AMBALA", "value": "std:0171" },
+					{ "name": "YAMUNANAGAR", "value": "std:01732" },
+					{ "name": "PANCHKULA", "value": "std:0172" },
+					{ "name": "KAITHAL", "value": "std:01746" },
+					{ "name": "KURUKSHETRA", "value": "std:01744" },
+					{ "name": "RUPNAGAR", "value": "std:01881" },
+					{ "name": "S.A.S Nagar", "value": "std:0172" },
+					{ "name": "PATIALA", "value": "std:0175" },
+					{ "name": "FATEHGARH SAHIB", "value": "std:01763" },
+					{ "name": "LUDHIANA", "value": "std:0161" },
+					{ "name": "MOGA", "value": "std:01636" },
+					{ "name": "FIROZEPUR", "value": "std:01632" },
+					{ "name": "AMRITSAR", "value": "std:0183" },
+					{ "name": "Tarn Taran", "value": "std:01852" },
+					{ "name": "GURDASPUR", "value": "std:01874" },
+					{ "name": "PATHANKOT", "value": "std:0186" },
+					{ "name": "JALANDHAR", "value": "std:0181" },
+					{ "name": "Shahid Bhagat Singh Nagar", "value": "std:01823" },
+					{ "name": "HOSHIARPUR", "value": "std:01882" },
+					{ "name": "KAPURTHALA", "value": "std:01822" },
+					{ "name": "SANGRUR", "value": "std:01672" },
+					{ "name": "MALERKOTLA", "value": "std:01675" },
+					{ "name": "BARNALA", "value": "std:01679" },
+					{ "name": "BATHINDA", "value": "std:0164" },
+					{ "name": "FARIDKOT", "value": "std:01639" },
+					{ "name": "SRI MUKTSAR SAHIB", "value": "std:01633" },
+					{ "name": "MANSA", "value": "std:01652" },
+					{ "name": "FAZILKA", "value": "std:01638" },
+					{ "name": "CHANDIGARH", "value": "std:0172" },
+					{ "name": "SHIMLA", "value": "std:0177" },
+					{ "name": "SOLAN", "value": "std:01792" },
+					{ "name": "SIRMAUR", "value": "std:01702" },
+					{ "name": "KULLU", "value": "std:01902" },
+					{ "name": "KINNAUR", "value": "std:01786" },
+					{ "name": "LAHUL AND SPITI", "value": "std:01900" },
+					{ "name": "BILASPUR", "value": "std:07752" },
+					{ "name": "UNA", "value": "std:02875" },
+					{ "name": "HAMIRPUR", "value": "std:05282" },
+					{ "name": "MANDI", "value": "std:01905" },
+					{ "name": "KANGRA", "value": "std:01892" },
+					{ "name": "CHAMBA", "value": "std:01376" },
+					{ "name": "JAMMU", "value": "std:0191" },
+					{ "name": "KATHUA", "value": "std:01922" },
+					{ "name": "UDHAMPUR", "value": "std:01992" },
+					{ "name": "SAMBA", "value": "std:01923" },
+					{ "name": "REASI", "value": "std:01991" },
+					{ "name": "DODA", "value": "std:01996" },
+					{ "name": "RAMBAN", "value": "std:01998" },
+					{ "name": "KISHTWAR", "value": "std:01995" },
+					{ "name": "POONCH", "value": "std:01965" },
+					{ "name": "RAJOURI", "value": "std:01962" },
+					{ "name": "SRINAGAR", "value": "std:0194" },
+					{ "name": "Budgam", "value": "std:01951" },
+					{ "name": "PULWAMA", "value": "std:01933" },
+					{ "name": "SHOPIAN", "value": "std:01921" },
+					{ "name": "GANDERBAL", "value": "std:0194" },
+					{ "name": "ANANTNAG", "value": "std:01932" },
+					{ "name": "KULGAM", "value": "std:01931" },
+					{ "name": "BARAMULLA", "value": "std:01952" },
+					{ "name": "BANDIPORA", "value": "std:01957" },
+					{ "name": "KUPWARA", "value": "std:01955" },
+					{ "name": "LEH LADAKH", "value": "std:01982" },
+					{ "name": "KARGIL", "value": "std:01985" },
+					{ "name": "GHAZIABAD", "value": "std:0120" },
+					{ "name": "GAUTAM BUDDHA NAGAR", "value": "std:0120" },
+					{ "name": "HAPUR", "value": "std:0122" },
+					{ "name": "ALIGARH", "value": "std:0571" },
+					{ "name": "HATHRAS", "value": "std:05722" },
+					{ "name": "BULANDSHAHR", "value": "std:05732" },
+					{ "name": "MAINPURI", "value": "std:05672" },
+					{ "name": "ETAWAH", "value": "std:05688" },
+					{ "name": "AURAIYA", "value": "std:05683" },
+					{ "name": "ETAH", "value": "std:05742" },
+					{ "name": "Kasganj", "value": "std:05744" },
+					{ "name": "KANPUR NAGAR", "value": "std:0512" },
+					{ "name": "KANPUR DEHAT", "value": "std:05113" },
+					{ "name": "MATHURA", "value": "std:0565" },
+					{ "name": "FARRUKHABAD", "value": "std:05692" },
+					{ "name": "KANNAUJ", "value": "std:05694" },
+					{ "name": "UNNAO", "value": "std:0515" },
+					{ "name": "HARDOI", "value": "std:05852" },
+					{ "name": "BANDA", "value": "std:0511" },
+					{ "name": "HAMIRPUR", "value": "std:05176" },
+					{ "name": "CHITRAKOOT", "value": "std:05198" },
+					{ "name": "RAE BARELI", "value": "std:0535" },
+					{ "name": "PRATAPGARH", "value": "std:05342" },
+					{ "name": "SULTANPUR", "value": "std:05362" },
+					{ "name": "AMETHI", "value": "std:05362" },
+					{ "name": "BARABANKI", "value": "std:05248" },
+					{ "name": "LUCKNOW", "value": "std:0522" },
+					{ "name": "BASTI", "value": "std:05542" },
+					{ "name": "GONDA", "value": "std:05262" },
+					{ "name": "SHRAVASTI", "value": "std:05262" },
+					{ "name": "AMBEDKAR NAGAR", "value": "std:05271" },
+					{ "name": "SITAPUR", "value": "std:05862" },
+					{ "name": "RAE BARELI", "value": "std:0535" }
+        ]
+      },
+      "domain": {
+        "type": "string",
+        "value": [
+          { "name": "Grocery", "value": "ONDC:RET10" },
+          { "name": "Fashion", "value": "ONDC:RET12" },
+          { "name": "BPC", "value": "ONDC:RET13"}
+        ]
+      },
+      "country_code": {
+        "type": "string",
+        "value": [{ "name": "India", "value": "IND" }]
+      }
+    }
+  }
+}
