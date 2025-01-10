@@ -36,16 +36,11 @@
             },
             "domain": {
               "type": "string",
-              "value": [
-                { "name": "Grocery", "value": "ONDC:RET10" },
-                { "name": "Fashion", "value": "ONDC:RET12" }
-              ]
+              "values_url": "assets/data/domain_codes.json"
             },
             "country_code": {
               "type": "string",
-              "value": [
-                { "name": "India", "value": "IND" }
-              ]
+              "values_url": "assets/data/country_codes.json"
             }
           }
         }
