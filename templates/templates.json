@@ -1,105 +1,147 @@
 {
-    "templates": [
-      {
-        "template_name": "Search By City",
-        "template_id": "search-by-city",
-        "base_template": {
-          "context": {
-            "ttl": "PT30S",
-            "city": "{{city_code}}",
-            "action": "search",
-            "bap_id": "{{bap_id}}",
-            "domain": "{{domain}}",
-            "bap_uri": "{{bap_uri}}",
-            "country": "{{country_code}}",
-            "timestamp": "{{timestamp}}",
-            "message_id": "{{message_id}}",
-            "core_version": "1.2.0",
-            "transaction_id": "{{transaction_id}}",
-            "bpp_id": "{{bpp_id}}",
-            "bpp_uri": "{{bpp_uri}}"
-          },
-          "message": {
-            "intent": {
-              "payment": {
-                "@ondc/org/buyer_app_finder_fee_type": "percent",
-                "@ondc/org/buyer_app_finder_fee_amount": "5"
-              }
-            }
-          }
+  "templates": [
+    {
+      "template_name": "Search By City",
+      "template_id": "search-by-city",
+      "base_template": {
+        "context": {
+          "ttl": "PT30S",
+          "city": "{{city_code}}",
+          "action": "search",
+          "bap_id": "{{bap_id}}",
+          "domain": "{{domain}}",
+          "bap_uri": "{{bap_uri}}",
+          "country": "{{country_code}}",
+          "timestamp": "{{timestamp}}",
+          "message_id": "{{message_id}}",
+          "core_version": "1.2.0",
+          "transaction_id": "{{transaction_id}}",
+          "bpp_id": "{{bpp_id}}",
+          "bpp_uri": "{{bpp_uri}}"
         },
-        "definition": {
-          "attribute": {
-            "city_code": {
-              "type": "string",
-              "values_url": "assets/data/city_code.json"
-            },
-            "domain": {
-              "type": "string",
-              "values_url": "assets/data/domain_code.json"
-            },
-            "country_code": {
-              "type": "string",
-              "values_url": "assets/data/country_code.json"
+        "message": {
+          "intent": {
+            "payment": {
+              "@ondc/org/buyer_app_finder_fee_type": "percent",
+              "@ondc/org/buyer_app_finder_fee_amount": "5"
             }
           }
         }
       },
-      {
-        "template_name": "Search By Item Code",
-        "template_id": "search-by-item-code",
-        "base_template": {
-          "context": {
-            "ttl": "PT30S",
-            "city": "{{city_code}}",
-            "action": "search",
-            "bap_id": "{{bap_id}}",
-            "domain": "{{domain}}",
-            "bap_uri": "{{bap_uri}}",
-            "country": "{{country_code}}",
-            "timestamp": "{{timestamp}}",
-            "message_id": "{{message_id}}",
-            "core_version": "1.2.0",
-            "transaction_id": "{{transaction_id}}",
-            "bpp_id": "{{bpp_id}}",
-            "bpp_uri": "{{bpp_uri}}"
+      "creation_prop": {
+        "optional": [],
+        "mandatory": ["domain", "city_code", "country_code"]
+      },
+      "runtime_prop": {
+        "optional": [],
+        "mandatory": [
+          "transaction_id",
+          "message_id",
+          "timestamp",
+          "bap_id",
+          "bap_uri"
+        ]
+      },
+      "additional_prop": [
+        {
+          "key": "buyer_finder_fee_percent",
+          "value": "5"
+        }
+      ],
+      "definition": {
+        "attribute": {
+          "city_code": {
+            "type": "string",
+            "values_url": "assets/data/city_code.json"
           },
-          "message": {
-            "intent": {
-              "items": [
-                {
-                  "id": "{{item_id}}",
-                  "parent_item_id": "{{parent_item_id}}",
-                  "descriptor": {
-                    "name": "{{item_name}}",
-                    "code": "{{item_code}}"
-                  },
-                  "category_id": "{{category_id}}"
-                }
-              ],
-              "payment": {
-                "@ondc/org/buyer_app_finder_fee_type": "percent",
-                "@ondc/org/buyer_app_finder_fee_amount": "5"
-              }
-            }
-          }
-        },
-        "definition": {
-          "attribute": {
-            "city_code": {
-              "type": "string",
-              "values_url": "assets/data/city_code.json"
-            },
-            "category_id": {
-              "type": "string",
-              "values_url": "assets/data/category_code.json"
-            },
-            "country_code": {
-              "type": "string",
-              "values_url": "assets/data/country_code.json"
-            }
+          "domain": {
+            "type": "string",
+            "values_url": "assets/data/domain_code.json"
+          },
+          "country_code": {
+            "type": "string",
+            "values_url": "assets/data/country_code.json"
           }
         }
       }
-    ]
-  }
+    },
+    {
+      "template_name": "Search By Item Code",
+      "template_id": "search-by-item-code",
+      "base_template": {
+        "context": {
+          "ttl": "PT30S",
+          "city": "{{city_code}}",
+          "action": "search",
+          "bap_id": "{{bap_id}}",
+          "domain": "{{domain}}",
+          "bap_uri": "{{bap_uri}}",
+          "country": "{{country_code}}",
+          "timestamp": "{{timestamp}}",
+          "message_id": "{{message_id}}",
+          "core_version": "1.2.0",
+          "transaction_id": "{{transaction_id}}",
+          "bpp_id": "{{bpp_id}}",
+          "bpp_uri": "{{bpp_uri}}"
+        },
+        "message": {
+          "intent": {
+            "items": [
+              {
+                "id": "{{item_id}}",
+                "parent_item_id": "{{parent_item_id}}",
+                "descriptor": {
+                  "name": "{{item_name}}",
+                  "code": "{{item_code}}"
+                },
+                "category_id": "{{category_id}}"
+              }
+            ],
+            "payment": {
+              "@ondc/org/buyer_app_finder_fee_type": "percent",
+              "@ondc/org/buyer_app_finder_fee_amount": "5"
+            }
+          }
+        }
+      },
+      "creation_prop": {
+        "optional": [],
+        "mandatory": ["domain", "item_name", "item_code", "category_id"]
+      },
+      "runtime_prop": {
+        "optional": ["item_id", "parent_item_id"],
+        "mandatory": [
+          "city_code",
+          "country_code",
+          "transaction_id",
+          "message_id",
+          "timestamp",
+          "bap_id",
+          "bap_uri"
+        ]
+      },
+      "additional_prop": [
+        {
+          "key": "buyer_finder_fee_percent",
+          "value": "5"
+        }
+      ],
+      "definition": {
+        "attribute": {
+          "city_code": {
+            "type": "string",
+            "values_url": "assets/data/city_code.json"
+          },
+          "category_id": {
+            "type": "string",
+            "values_url": "assets/data/category_code.json"
+          },
+          "country_code": {
+            "type": "string",
+            "values_url": "assets/data/country_code.json"
+          }
+        }
+      }
+    }
+  ]
+}
