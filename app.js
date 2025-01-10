@@ -30,7 +30,10 @@ async function renderTemplate(templateId) {
   const template = templates.find((tpl) => tpl.template_id === templateId);
   const contentElement = document.getElementById('template-content');
   
-  if (template) {
+  if (contentElement && template) {
+    // Clear existing content
+    contentElement.innerHTML = '';
+
     // Fetching values dynamically based on template's attributes
     for (const [attribute, config] of Object.entries(template.definition.attribute)) {
       const values = await fetchValuesFromUrl(config.values_url);
@@ -44,11 +47,33 @@ async function renderTemplate(templateId) {
       });
       contentElement.appendChild(element);
     }
-    
-    const formattedTemplate = JSON.stringify(template, null, 2);
-    contentElement.textContent = formattedTemplate;
   }
 }
+// async function renderTemplate(templateId) {
+//   const templates = await loadTemplates();
+//   const template = templates.find((tpl) => tpl.template_id === templateId);
+//   const contentElement = document.getElementById('template-content');
+  
+//   if (template) {
+//     // Fetching values dynamically based on template's attributes
+//     for (const [attribute, config] of Object.entries(template.definition.attribute)) {
+//       const values = await fetchValuesFromUrl(config.values_url);
+//       // Create dropdown or other elements based on values
+//       const element = document.createElement('select');
+//       values.forEach((item) => {
+//         const option = document.createElement('option');
+//         option.value = item.value;
+//         option.textContent = item.name;
+//         element.appendChild(option);
+//       });
+//       contentElement.appendChild(element);
+//     }
+    
+//     const formattedTemplate = JSON.stringify(template, null, 2);
+//     contentElement.textContent = formattedTemplate;
+//   }
+// }
+
 
 // Event listener for dropdown change
 document.getElementById('template-dropdown').addEventListener('change', (event) => {
