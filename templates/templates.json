@@ -32,15 +32,15 @@
           "attribute": {
             "city_code": {
               "type": "string",
-              "values_url": "assets/data/city_codes.json"
+              "values_url": "assets/data/city_code.json"
             },
             "domain": {
               "type": "string",
-              "values_url": "assets/data/domain_codes.json"
+              "values_url": "assets/data/domain_code.json"
             },
             "country_code": {
               "type": "string",
-              "values_url": "assets/data/country_codes.json"
+              "values_url": "assets/data/country_code.json"
             }
           }
         }
@@ -88,20 +88,15 @@
           "attribute": {
             "city_code": {
               "type": "string",
-              "value": [
-                { "name": "NEW DELHI", "value": "std:011" },
-                { "name": "SRINAGAR", "value": "std:0194" }
-              ]
+              "values_url": "assets/data/city_code.json"
             },
             "category_id": {
               "type": "string",
-              "value": []
+              "values_url": "assets/data/category_code.json"
             },
             "country_code": {
               "type": "string",
-              "value": [
-                { "name": "India", "value": "IND" }
-              ]
+              "values_url": "assets/data/country_code.json"
             }
           }
         }
