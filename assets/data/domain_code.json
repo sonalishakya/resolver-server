@@ -1,4 +1,5 @@
 [
   { "name": "Grocery", "value": "ONDC:RET10" },
-  { "name": "Fashion", "value": "ONDC:RET12" }
+  { "name": "Fashion", "value": "ONDC:RET12" },
+  { "name": "BPC", "value": "ONDC:RET13" }
 ]
