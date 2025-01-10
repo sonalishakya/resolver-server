@@ -32,7 +32,7 @@ async function renderTemplate(templateId) {
   // Ensure the content element is available
   const contentElement = document.getElementById('template-content');
   if (!contentElement) {
-    console.error('Element #template-content not found');
+    console.log('Element #template-content not found');
     return;
   }
 
