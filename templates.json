@@ -32,10 +32,7 @@
           "attribute": {
             "city_code": {
               "type": "string",
-              "value": [
-                { "name": "NEW DELHI", "value": "std:011" },
-                { "name": "SRINAGAR", "value": "std:0194" }
-              ]
+              "values_url": "data/city_codes.json"
             },
             "domain": {
               "type": "string",
