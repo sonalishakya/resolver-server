@@ -1,6 +1,6 @@
 // Function to load the template data from templates.json
 async function loadTemplates() {
-  const response = await fetch('templates.json');
+  const response = await fetch('templates/templates.json');
   const data = await response.json();
   return data.templates;
 }
