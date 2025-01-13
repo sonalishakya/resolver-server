@@ -13,16 +13,16 @@ async function fetchValuesFromUrl(url) {
 }
 
 // Populate the dropdown with template names and attributes
-async function populateDropdown() {
-  const templates = await loadTemplates();
-  const dropdown = document.getElementById('template-dropdown');
-  templates.forEach((template) => {
-    const option = document.createElement('option');
-    option.value = template.template_id;
-    option.textContent = template.template_name;
-    dropdown.appendChild(option);
-  });
-}
+// async function populateDropdown() {
+//   const templates = await loadTemplates();
+//   const dropdown = document.getElementById('template-dropdown');
+//   templates.forEach((template) => {
+//     const option = document.createElement('option');
+//     option.value = template.template_id;
+//     option.textContent = template.template_name;
+//     dropdown.appendChild(option);
+//   });
+// }
 
 // Render the selected template
 async function renderTemplate(templateId) {
@@ -91,12 +91,12 @@ async function renderTemplate(templateId) {
 }
 
 // Event listener for dropdown change
-document.getElementById('template-dropdown').addEventListener('change', (event) => {
-  const selectedTemplate = event.target.value;
-  if (selectedTemplate) {
-    renderTemplate(selectedTemplate);
-  }
-});
+// document.getElementById('template-dropdown').addEventListener('change', (event) => {
+//   const selectedTemplate = event.target.value;
+//   if (selectedTemplate) {
+//     renderTemplate(selectedTemplate);
+//   }
+// });
 
 // Populate the cards with template names
 async function populateCards() {
@@ -131,7 +131,7 @@ window.onload = function () {
 };
 
 // Initial setup on page load
-window.onload = function() {
-  populateDropdown();
-};
+// window.onload = function() {
+//   populateDropdown();
+// };
 
