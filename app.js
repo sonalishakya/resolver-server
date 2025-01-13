@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 // Function to load the template data from templates.json
 async function loadTemplates() {
   const response = await fetch('templates/templates.json');
@@ -24,7 +22,7 @@ async function saveToGitHub(baseTemplate) {
   const githubRepo = 'sonalishakya/resolver-storage'; // Replace with your repository
   const branch = 'gh-pages'; // Replace with your branch
   const apiUrl = `https://api.github.com/repos/${githubRepo}/contents/${filename}`;
-  const token = process.env.GITHUB_TOKEN;
+  const token = "fake-token";
 
   // GitHub API request
   const response = await fetch(apiUrl, {
