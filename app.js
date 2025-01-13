@@ -98,6 +98,38 @@ document.getElementById('template-dropdown').addEventListener('change', (event) 
   }
 });
 
+// Populate the cards with template names
+async function populateCards() {
+  const templates = await loadTemplates();
+  const cardsContainer = document.getElementById('template-cards');
+
+  templates.forEach((template) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.templateId = template.template_id;
+
+    const title = document.createElement('h3');
+    title.textContent = template.template_name;
+
+    const description = document.createElement('p');
+    description.textContent = `Template ID: ${template.template_id}`;
+
+    card.appendChild(title);
+    card.appendChild(description);
+    cardsContainer.appendChild(card);
+
+    // Add click event to render template on card selection
+    card.addEventListener('click', () => {
+      renderTemplate(template.template_id);
+    });
+  });
+}
+
+// Initial setup on page load
+window.onload = function () {
+  populateCards();
+};
+
 // Initial setup on page load
 window.onload = function() {
   populateDropdown();
