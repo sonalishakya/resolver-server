@@ -1,5 +1,3 @@
-let generatedUUID;  // Declare a variable to hold the UUID
-
 // Function to load the template data from templates.json
 async function loadTemplates() {
   const response = await fetch('templates/templates.json');
@@ -16,16 +14,15 @@ async function fetchValuesFromUrl(url) {
 
 // Function to save the base template to GitHub
 async function saveToGitHub(baseTemplate) {
-  generatedUUID = crypto.randomUUID();  // Store UUID here
-
-  const filename = `${generatedUUID}.json`;  // Use the same UUID for the filename
+  const uuid = crypto.randomUUID(); // Generate UUID
+  const filename = `${uuid}.json`; // Set filename
   const content = JSON.stringify(baseTemplate, null, 2); // Prepare content
 
   // GitHub API configuration
   const githubRepo = 'sonalishakya/resolver-storage'; // Replace with your repository
   const branch = 'gh-pages'; // Replace with your branch
   const apiUrl = `https://api.github.com/repos/${githubRepo}/contents/${filename}`;
-  const token = "fake-token";  // Replace with a real token
+  const token = "fake-token";
 
   // GitHub API request
   const response = await fetch(apiUrl, {
@@ -49,6 +46,8 @@ async function saveToGitHub(baseTemplate) {
     console.error('Error saving file:', error);
     alert('Failed to save file to GitHub.');
   }
+
+  return uuid; // Return UUID for later use in deeplink
 }
 
 // Function to render the selected template
@@ -155,8 +154,8 @@ async function handleSubmit(event, template) {
     }
   });
 
-  // Save to GitHub
-  await saveToGitHub(baseTemplate);
+  // Save to GitHub and get the UUID
+  const generatedUUID = await saveToGitHub(baseTemplate);
 
   // Generate Deeplink with the same UUID used for GitHub file name
   const deeplink = `beckn://github.ondc/${generatedUUID}`;
@@ -164,7 +163,11 @@ async function handleSubmit(event, template) {
   // Create an email input field and confirmation message
   const contentElement = document.getElementById('template-content');
   contentElement.innerHTML = `
-    <p>Deeplink: <span>${deeplink}</span> <button onclick="copyDeeplink('${deeplink}')">Copy</button></p>
+    <p style="font-weight: bold; color: #333;">Deeplink: 
+      <span style="color: #007bff; font-family: 'Courier New', monospace;">${deeplink}</span> 
+      <button onclick="copyDeeplink('${deeplink}')"
+              style="background-color: #28a745; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Copy</button>
+    </p>
     <p>Kindly provide your email ID to receive the deeplink and QR code once your request is reviewed and verified by ONDC.</p>
   `;
 
@@ -206,7 +209,7 @@ async function handleSubmit(event, template) {
   contentElement.appendChild(submitEmailButton);
 }
 
-// Copy Deeplink to clipboard
+// Copy Deeplink to clipboard with styling
 function copyDeeplink(deeplink) {
   navigator.clipboard.writeText(deeplink).then(() => {
     alert('Deeplink copied to clipboard!');
@@ -245,6 +248,7 @@ window.onload = function () {
   populateCards();
 };
 
+// let generatedUUID;  // Declare a variable to hold the UUID
 
 // // Function to load the template data from templates.json
 // async function loadTemplates() {
@@ -262,15 +266,16 @@ window.onload = function () {
 
 // // Function to save the base template to GitHub
 // async function saveToGitHub(baseTemplate) {
-//   const uuid = crypto.randomUUID(); // Generate UUID
-//   const filename = `${uuid}.json`; // Set filename
+//   generatedUUID = crypto.randomUUID();  // Store UUID here
+
+//   const filename = `${generatedUUID}.json`;  // Use the same UUID for the filename
 //   const content = JSON.stringify(baseTemplate, null, 2); // Prepare content
 
 //   // GitHub API configuration
 //   const githubRepo = 'sonalishakya/resolver-storage'; // Replace with your repository
 //   const branch = 'gh-pages'; // Replace with your branch
 //   const apiUrl = `https://api.github.com/repos/${githubRepo}/contents/${filename}`;
-//   const token = "fake-token";
+//   const token = "fake-token";  // Replace with a real token
 
 //   // GitHub API request
 //   const response = await fetch(apiUrl, {
@@ -403,9 +408,13 @@ window.onload = function () {
 //   // Save to GitHub
 //   await saveToGitHub(baseTemplate);
 
+//   // Generate Deeplink with the same UUID used for GitHub file name
+//   const deeplink = `beckn://github.ondc/${generatedUUID}`;
+
 //   // Create an email input field and confirmation message
 //   const contentElement = document.getElementById('template-content');
 //   contentElement.innerHTML = `
+//     <p>Deeplink: <span>${deeplink}</span> <button onclick="copyDeeplink('${deeplink}')">Copy</button></p>
 //     <p>Kindly provide your email ID to receive the deeplink and QR code once your request is reviewed and verified by ONDC.</p>
 //   `;
 
@@ -445,6 +454,13 @@ window.onload = function () {
 
 //   contentElement.appendChild(emailInput);
 //   contentElement.appendChild(submitEmailButton);
+// }
+
+// // Copy Deeplink to clipboard
+// function copyDeeplink(deeplink) {
+//   navigator.clipboard.writeText(deeplink).then(() => {
+//     alert('Deeplink copied to clipboard!');
+//   });
 // }
 
 // // Populate the cards with template names
