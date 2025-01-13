@@ -130,7 +130,7 @@
         "attribute": {
           "domain": {
             "type": "string",
-            "value": "assets/data/domain_code.json"
+            "values_url": "assets/data/domain_code.json"
           },
           "city_code": {
             "type": "string",
