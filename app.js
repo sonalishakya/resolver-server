@@ -158,16 +158,16 @@ async function handleSubmit(event, template) {
   const generatedUUID = await saveToGitHub(baseTemplate);
 
   // Commented displayed deeplink for now
-  // const deeplink = `beckn://github.ondc/${generatedUUID}`;
+  const deeplink = `beckn://github.ondc/${generatedUUID}`;
 
   // Create an email input field and confirmation message
   const contentElement = document.getElementById('template-content');
+//   <p style="font-weight: bold; color: #333;">Deeplink: 
+//   <span style="color: #007bff; font-family: 'Courier New', monospace;">${deeplink}</span> 
+//   <button onclick="copyDeeplink('${deeplink}')"
+//           style="background-color: #28a745; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Copy</button>
+// </p>
   contentElement.innerHTML = `
-    <p style="font-weight: bold; color: #333;">Deeplink: 
-      <span style="color: #007bff; font-family: 'Courier New', monospace;">${deeplink}</span> 
-      <button onclick="copyDeeplink('${deeplink}')"
-              style="background-color: #28a745; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Copy</button>
-    </p>
     <p>Kindly provide your email ID to receive the deeplink and QR code once your request is reviewed and verified by ONDC.</p>
   `;
 
