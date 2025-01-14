@@ -42,7 +42,7 @@ async function saveToGitHub(baseTemplate) {
     console.log(`File saved as ${filename}`);
     alert(`File saved to GitHub as ${filename}`);
   } else {
-    // const error = await response.json();
+    const error = await response.json();
     console.error('Error saving file:', error);
     alert('Failed to save file to GitHub. Will be fixed post adding PAT token/hosting on server!');
   }
