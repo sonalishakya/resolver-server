@@ -67,6 +67,7 @@ footer {
   margin-top: 2em;
 }
 
+/* Card layout on home page */
 .cards-container {
   display: flex;
   gap: 1rem;

@@ -14,15 +14,15 @@ async function fetchValuesFromUrl(url) {
 
 // Function to save the base template to GitHub
 async function saveToGitHub(baseTemplate) {
-  const uuid = crypto.randomUUID(); // Generate UUID
-  const filename = `${uuid}.json`; // Set filename
-  const content = JSON.stringify(baseTemplate, null, 2); // Prepare content
+  const uuid = crypto.randomUUID(); 
+  const filename = `${uuid}.json`; 
+  const content = JSON.stringify(baseTemplate, null, 2);
 
   // GitHub API configuration
-  const githubRepo = 'sonalishakya/resolver-storage'; // Replace with your repository
-  const branch = 'gh-pages'; // Replace with your branch
+  const githubRepo = 'sonalishakya/resolver-storage'; 
+  const branch = 'gh-pages'; 
   const apiUrl = `https://api.github.com/repos/${githubRepo}/contents/${filename}`;
-  const token = "fake-token";
+  const token = "fake-token"; // Replace from .env file 
 
   // GitHub API request
   const response = await fetch(apiUrl, {
@@ -33,7 +33,7 @@ async function saveToGitHub(baseTemplate) {
     },
     body: JSON.stringify({
       message: `Add file ${filename}`,
-      content: btoa(content), // Encode content to base64
+      content: btoa(content), 
       branch: branch,
     }),
   });
@@ -47,7 +47,7 @@ async function saveToGitHub(baseTemplate) {
     alert('Failed to save file to GitHub.');
   }
 
-  return uuid; // Return UUID for later use in deeplink
+  return uuid; 
 }
 
 // Function to render the selected template
@@ -157,7 +157,7 @@ async function handleSubmit(event, template) {
   // Save to GitHub and get the UUID
   const generatedUUID = await saveToGitHub(baseTemplate);
 
-  // Generate Deeplink with the same UUID used for GitHub file name
+  // Commented displayed deeplink for now
   // const deeplink = `beckn://github.ondc/${generatedUUID}`;
 
   // Create an email input field and confirmation message
