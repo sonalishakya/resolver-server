@@ -129,42 +129,50 @@ async function renderTemplate(templateId) {
   contentElement.appendChild(form);
 }
 
-// Handle form submission
 async function handleSubmit(event, template) {
   event.preventDefault();
 
   const form = event.target;
   const formData = new FormData(form);
 
-  // Populate the base template using JSON Schema structure
+  // Parse the JSON schema structure
   const baseTemplate = JSON.parse(JSON.stringify(template.base_template));
   const contextProperties = baseTemplate.properties.context.properties;
-  const messageProperties = baseTemplate.properties.message.properties.intent.properties;
+  const messageProperties = baseTemplate.properties.message.properties.intent.properties.payment.properties;
 
-  const creationProps = template.creation_prop?.mandatory || [];
+  // Populate context fields from form input
+  Object.keys(contextProperties).forEach((key) => {
+    if (formData.has(key)) {
+      baseTemplate.properties.context.properties[key].const = formData.get(key);
+    }
+  });
 
-  creationProps.forEach((field) => {
-    const value = formData.get(field);
-    if (value) {
-      if (contextProperties[field]) {
-        contextProperties[field].const = value;
-      } else if (messageProperties.payment.properties[field]) {
-        messageProperties.payment.properties[field].const = value;
-      }
+  // Populate message payment fields from form input
+  Object.keys(messageProperties).forEach((key) => {
+    if (formData.has(key)) {
+      baseTemplate.properties.message.properties.intent.properties.payment.properties[key].type = formData.get(key);
     }
   });
 
   // Save to GitHub and get the UUID
   const generatedUUID = await saveToGitHub(baseTemplate);
 
+  const deeplink = `beckn://github.ondc/${generatedUUID}`;
+
+  // Update UI with deep link and email input
   const contentElement = document.getElementById('template-content');
   contentElement.innerHTML = `
-    <p>Kindly provide your email ID to receive the deeplink and QR code once your request is reviewed and verified by ONDC.</p>
+    <p style="font-weight: bold; color: #333;">Deeplink: 
+      <span style="color: #007bff; font-family: 'Courier New', monospace;">${deeplink}</span> 
+      <button onclick="copyDeeplink('${deeplink}')"
+        style="background-color: #28a745; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Copy</button>
+    </p>
+    <p>Enter your email to receive confirmation:</p>
   `;
 
   const emailInput = document.createElement('input');
   emailInput.type = 'email';
-  emailInput.placeholder = 'Enter your email ID';
+  emailInput.placeholder = 'Enter your email';
   emailInput.style.margin = '10px 0';
   emailInput.style.padding = '8px';
   emailInput.style.width = '100%';
@@ -180,9 +188,6 @@ async function handleSubmit(event, template) {
   submitEmailButton.style.borderRadius = '5px';
   submitEmailButton.style.cursor = 'pointer';
 
-  submitEmailButton.onmouseover = () => submitEmailButton.style.backgroundColor = '#0056b3';
-  submitEmailButton.onmouseout = () => submitEmailButton.style.backgroundColor = '#007bff';
-
   submitEmailButton.addEventListener('click', () => {
     if (!emailInput.value) {
       alert('Please enter a valid email ID.');
@@ -195,6 +200,73 @@ async function handleSubmit(event, template) {
   contentElement.appendChild(emailInput);
   contentElement.appendChild(submitEmailButton);
 }
+
+// Handle form submission
+// async function handleSubmit(event, template) {
+//   event.preventDefault();
+
+//   const form = event.target;
+//   const formData = new FormData(form);
+
+//   // Populate the base template using JSON Schema structure
+//   const baseTemplate = JSON.parse(JSON.stringify(template.base_template));
+//   const contextProperties = baseTemplate.properties.context.properties;
+//   const messageProperties = baseTemplate.properties.message.properties.intent.properties;
+
+//   const creationProps = template.creation_prop?.mandatory || [];
+
+//   creationProps.forEach((field) => {
+//     const value = formData.get(field);
+//     if (value) {
+//       if (contextProperties[field]) {
+//         contextProperties[field].const = value;
+//       } else if (messageProperties.payment.properties[field]) {
+//         messageProperties.payment.properties[field].const = value;
+//       }
+//     }
+//   });
+
+//   // Save to GitHub and get the UUID
+//   const generatedUUID = await saveToGitHub(baseTemplate);
+
+//   const contentElement = document.getElementById('template-content');
+//   contentElement.innerHTML = `
+//     <p>Kindly provide your email ID to receive the deeplink and QR code once your request is reviewed and verified by ONDC.</p>
+//   `;
+
+//   const emailInput = document.createElement('input');
+//   emailInput.type = 'email';
+//   emailInput.placeholder = 'Enter your email ID';
+//   emailInput.style.margin = '10px 0';
+//   emailInput.style.padding = '8px';
+//   emailInput.style.width = '100%';
+//   emailInput.style.border = '1px solid #ccc';
+//   emailInput.style.borderRadius = '4px';
+
+//   const submitEmailButton = document.createElement('button');
+//   submitEmailButton.textContent = 'Submit Email';
+//   submitEmailButton.style.padding = '10px 20px';
+//   submitEmailButton.style.backgroundColor = '#007bff';
+//   submitEmailButton.style.color = '#fff';
+//   submitEmailButton.style.border = 'none';
+//   submitEmailButton.style.borderRadius = '5px';
+//   submitEmailButton.style.cursor = 'pointer';
+
+//   submitEmailButton.onmouseover = () => submitEmailButton.style.backgroundColor = '#0056b3';
+//   submitEmailButton.onmouseout = () => submitEmailButton.style.backgroundColor = '#007bff';
+
+//   submitEmailButton.addEventListener('click', () => {
+//     if (!emailInput.value) {
+//       alert('Please enter a valid email ID.');
+//       return;
+//     }
+//     alert('Email submitted successfully!');
+//     contentElement.innerHTML = `<pre>${JSON.stringify(baseTemplate, null, 2)}</pre>`;
+//   });
+
+//   contentElement.appendChild(emailInput);
+//   contentElement.appendChild(submitEmailButton);
+// }
 
 // Populate the cards with template names
 async function populateCards() {
