@@ -36,7 +36,7 @@
               },
               "country": {
                 "type": "string",
-                "const": "{{country}}"
+                "enum": "{{country}}"
               },
               "timestamp": {
                 "type": "string",
@@ -89,10 +89,12 @@
                     "type": "object",
                     "properties": {
                       "@ondc/org/buyer_app_finder_fee_type": {
-                        "type": "string"
+                        "type": "string",
+                        "const": "percent"
                       },
                       "@ondc/org/buyer_app_finder_fee_amount": {
-                        "type": "string"
+                        "type": "string",
+                        "const": "5"
                       }
                     },
                     "required": [
@@ -128,6 +130,353 @@
           "timestamp",
           "bap_id",
           "bap_uri"
+        ]
+      },
+      "additional_prop": [
+        {
+          "key": "buyer_finder_fee_percent",
+          "value": "5"
+        }
+      ],
+      "definition": {
+        "attribute": {
+          "city_code": {
+            "type": "string",
+            "values_url": "assets/data/city_code.json"
+          },
+          "domain": {
+            "type": "string",
+            "values_url": "assets/data/domain_code.json"
+          },
+          "country_code": {
+            "type": "string",
+            "values_url": "assets/data/country_code.json"
+          }
+        }
+      }
+    },
+    {
+      "template_name": "Search By Catalog",
+      "template_id": "search-by-catalog",
+      "base_template": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "ttl": {
+                "type": "string",
+                "const": "PT30S"
+              },
+              "city": {
+                "type": "string",
+                "enum": "{{city_code}}"
+              },
+              "action": {
+                "type": "string",
+                "const": "search"
+              },
+              "bap_id": {
+                "type": "string",
+                "const" : "{{bap_id}}"
+              },
+              "domain": {
+                "type": "string",
+                "enum": "{{domain}}"
+              },
+              "bap_uri": {
+                "type": "string",
+                "const": "{{bap_id}}"
+              },
+              "country": {
+                "type": "string",
+                "enum": "{{country}}"
+              },
+              "timestamp": {
+                "type": "string",
+                "const": "{{timestamp}}"
+              },
+              "message_id": {
+                "type": "string",
+                "const": "{{message_id}}"
+              },
+              "core_version": {
+                "type": "string",
+                "const": "1.2.0"
+              },
+              "transaction_id": {
+                "type": "string",
+                "const": "{{transaction_id}}"
+              },
+              "bpp_id": {
+                "type": "string",
+                "const": "{{bap_id}}"
+              },
+              "bpp_uri": {
+                "type": "string",
+                "const": "{{bpp_uri}}"
+              }
+            },
+            "required": [
+              "ttl",
+              "city",
+              "action",
+              "bap_id",
+              "domain",
+              "bap_uri",
+              "country",
+              "timestamp",
+              "message_id",
+              "core_version",
+              "transaction_id",
+              "bpp_id",
+              "bpp_uri"
+            ]
+          },
+          "message": {
+            "type": "object",
+            "properties": {
+              "intent": {
+                "type": "object",
+                "properties": {
+                  "provider": {
+                    "type":"object",
+                    "properties": {
+                      "id" : {
+                        "type" : "string",
+                        "const": "{{provider_id}}"
+                      }
+                    }
+                  },
+                  "payment": {
+                    "type": "object",
+                    "properties": {
+                      "@ondc/org/buyer_app_finder_fee_type": {
+                        "type": "string",
+                        "const": "percent"
+                      },
+                      "@ondc/org/buyer_app_finder_fee_amount": {
+                        "type": "string",
+                        "const": "5"
+                      }
+                    },
+                    "required": [
+                      "@ondc/org/buyer_app_finder_fee_type",
+                      "@ondc/org/buyer_app_finder_fee_amount"
+                    ]
+                  }
+                },
+                "required": [
+                  "payment"
+                ]
+              }
+            },
+            "required": [
+              "intent"
+            ]
+          }
+        },
+        "required": [
+          "context",
+          "message"
+        ]
+      },
+      "creation_prop": {
+        "optional": [],
+        "mandatory": ["domain", "bpp_id", "bpp_uri", "provider_id"]
+      },
+      "runtime_prop": {
+        "optional": [],
+        "mandatory": [
+          "transaction_id",
+          "message_id",
+          "timestamp",
+          "country_code",
+          "city_code",
+          "bap_id",
+          "bap_uri"
+        ]
+      },
+      "additional_prop": [
+        {
+          "key": "buyer_finder_fee_percent",
+          "value": "5"
+        }
+      ],
+      "definition": {
+        "attribute": {
+          "city_code": {
+            "type": "string",
+            "values_url": "assets/data/city_code.json"
+          },
+          "domain": {
+            "type": "string",
+            "values_url": "assets/data/domain_code.json"
+          },
+          "country_code": {
+            "type": "string",
+            "values_url": "assets/data/country_code.json"
+          }
+        }
+      }
+    },
+    {
+      "template_name": "Search By Item Code",
+      "template_id": "search-by-item-code",
+      "base_template": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "ttl": {
+                "type": "string",
+                "const": "PT30S"
+              },
+              "city": {
+                "type": "string",
+                "enum": "{{city_code}}"
+              },
+              "action": {
+                "type": "string",
+                "const": "search"
+              },
+              "bap_id": {
+                "type": "string",
+                "const" : "{{bap_id}}"
+              },
+              "domain": {
+                "type": "string",
+                "enum": "{{domain}}"
+              },
+              "bap_uri": {
+                "type": "string",
+                "const": "{{bap_id}}"
+              },
+              "country": {
+                "type": "string",
+                "enum": "{{country}}"
+              },
+              "timestamp": {
+                "type": "string",
+                "const": "{{timestamp}}"
+              },
+              "message_id": {
+                "type": "string",
+                "const": "{{message_id}}"
+              },
+              "core_version": {
+                "type": "string",
+                "const": "1.2.0"
+              },
+              "transaction_id": {
+                "type": "string",
+                "const": "{{transaction_id}}"
+              },
+              "bpp_id": {
+                "type": "string",
+                "const": "{{bap_id}}"
+              },
+              "bpp_uri": {
+                "type": "string",
+                "const": "{{bpp_uri}}"
+              }
+            },
+            "required": [
+              "ttl",
+              "city",
+              "action",
+              "bap_id",
+              "domain",
+              "bap_uri",
+              "country",
+              "timestamp",
+              "message_id",
+              "core_version",
+              "transaction_id",
+              "bpp_id",
+              "bpp_uri"
+            ]
+          },
+          "message": {
+            "type": "object",
+            "properties": {
+              "intent": {
+                "type": "object",
+                "properties": {
+                  "item": {
+                    "type":"object",
+                    "properties" : {
+                      "id" : {
+                        "type":"string",
+                        "const": "{{item_id}}"
+                      },
+                      "parent_item_id" : {
+                        "type": "string",
+                        "const": "{{parent_item_id}}"
+                      },
+                      "descriptor" : {
+                        "type" : "object",
+                        "properties": {
+                          "name" : {
+                            "type": "string",
+                            "const": "{{item_name}}"
+                          },
+                          "code": {
+                            "type": "string",
+                            "const": "{{item_code}}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "payment": {
+                    "type": "object",
+                    "properties": {
+                      "@ondc/org/buyer_app_finder_fee_type": {
+                        "type": "string",
+                        "const": "percent"
+                      },
+                      "@ondc/org/buyer_app_finder_fee_amount": {
+                        "type": "string",
+                        "const": "5"
+                      }
+                    },
+                    "required": [
+                      "@ondc/org/buyer_app_finder_fee_type",
+                      "@ondc/org/buyer_app_finder_fee_amount"
+                    ]
+                  }
+                },
+                "required": [
+                  "payment"
+                ]
+              }
+            },
+            "required": [
+              "intent"
+            ]
+          }
+        },
+        "required": [
+          "context",
+          "message"
+        ]
+      },
+      "creation_prop": {
+        "optional": [],
+        "mandatory": ["item_code", "item_name"]
+      },
+      "runtime_prop": {
+        "optional": [],
+        "mandatory": [
+          "transaction_id",
+          "message_id",
+          "timestamp",
+          "bap_id",
+          "bap_uri","domain", "city_code", "country_code"
         ]
       },
       "additional_prop": [
