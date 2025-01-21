@@ -135,66 +135,56 @@ async function handleSubmit(event, template) {
   const form = event.target;
   const formData = new FormData(form);
 
-  // Parse the JSON schema structure
-  const baseTemplate = JSON.parse(JSON.stringify(template.base_template));
-  const contextProperties = baseTemplate.properties.context.properties;
-  const messageProperties = baseTemplate.properties.message.properties.intent.properties.payment.properties;
+  // Deep copy of the base template to avoid mutation
+  const updatedTemplate = JSON.parse(JSON.stringify(template.base_template));
 
-  // Populate context fields from form input
-  Object.keys(contextProperties).forEach((key) => {
-    if (formData.has(key)) {
-      baseTemplate.properties.context.properties[key].const = formData.get(key);
+  // Function to recursively replace placeholders with user input
+  function populateTemplate(obj, formData) {
+    for (let key in obj) {
+      if (typeof obj[key] === "object" && obj[key] !== null) {
+        populateTemplate(obj[key], formData);
+      } else if (typeof obj[key] === "string" && obj[key].startsWith("{{")) {
+        const fieldName = obj[key].replace(/[{}]/g, ""); // Remove {{ }}
+        if (formData.has(fieldName)) {
+          obj[key] = formData.get(fieldName); // Replace with user input
+        }
+      }
     }
-  });
+  }
 
-  // Populate message payment fields from form input
-  Object.keys(messageProperties).forEach((key) => {
-    if (formData.has(key)) {
-      baseTemplate.properties.message.properties.intent.properties.payment.properties[key].type = formData.get(key);
-    }
-  });
+  // Populate the template with user input values
+  populateTemplate(updatedTemplate.properties, formData);
 
-  // Save to GitHub and get the UUID
-  const generatedUUID = await saveToGitHub(baseTemplate);
+  // Save the updated template to GitHub and generate UUID
+  const generatedUUID = await saveToGitHub(updatedTemplate);
 
   const deeplink = `beckn://github.ondc/${generatedUUID}`;
 
-  // Update UI with deep link and email input
+  // Update UI with the generated deep link
   const contentElement = document.getElementById('template-content');
   contentElement.innerHTML = `
-    <p style="font-weight: bold; color: #333;">Deeplink: 
-      <span style="color: #007bff; font-family: 'Courier New', monospace;">${deeplink}</span> 
-      <button onclick="copyDeeplink('${deeplink}')"
-        style="background-color: #28a745; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Copy</button>
+    <p><strong>Deeplink:</strong> 
+      <span style="color: #007bff;">${deeplink}</span> 
+      <button onclick="copyDeeplink('${deeplink}')">Copy</button>
     </p>
     <p>Enter your email to receive confirmation:</p>
   `;
 
+  // Email input field
   const emailInput = document.createElement('input');
   emailInput.type = 'email';
   emailInput.placeholder = 'Enter your email';
   emailInput.style.margin = '10px 0';
-  emailInput.style.padding = '8px';
-  emailInput.style.width = '100%';
-  emailInput.style.border = '1px solid #ccc';
-  emailInput.style.borderRadius = '4px';
 
   const submitEmailButton = document.createElement('button');
   submitEmailButton.textContent = 'Submit Email';
-  submitEmailButton.style.padding = '10px 20px';
-  submitEmailButton.style.backgroundColor = '#007bff';
-  submitEmailButton.style.color = '#fff';
-  submitEmailButton.style.border = 'none';
-  submitEmailButton.style.borderRadius = '5px';
-  submitEmailButton.style.cursor = 'pointer';
-
   submitEmailButton.addEventListener('click', () => {
     if (!emailInput.value) {
       alert('Please enter a valid email ID.');
       return;
     }
     alert('Email submitted successfully!');
-    contentElement.innerHTML = `<pre>${JSON.stringify(baseTemplate, null, 2)}</pre>`;
+    contentElement.innerHTML = `<pre>${JSON.stringify(updatedTemplate, null, 2)}</pre>`;
   });
 
   contentElement.appendChild(emailInput);
