@@ -168,11 +168,9 @@ async function handleSubmit(event, template) {
   const contentElement = document.getElementById('template-content');
   contentElement.innerHTML = `
   <p style="font-size: 18px; font-weight: bold; margin-bottom: 2px; ">Deeplink:</p>
-  <p style="word-wrap: break-word; font-size: 16px; color: #007bff; margin-bottom: 2px;">
-    <a href="${deeplink}" target="_blank" style="text-decoration: none; color: #007bff;">${deeplink}</a>
-  </p>
+  <a href="${deeplink}" target="_blank" style="text-decoration: none; color: #007bff; font-size: 16px; margin-bottom: 2px">${deeplink}</a>
   <button onclick="copyDeeplink('${deeplink}')"
-  style="padding: 8px 8px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;>
+  style="padding: 8px 8px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px">
   Copy
   </button>
   <p>Enter your email to receive confirmation:</p>
