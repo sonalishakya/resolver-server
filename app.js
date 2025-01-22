@@ -1,3 +1,4 @@
+
 // Function to load the template data from templates.json
 async function loadTemplates() {
   const response = await fetch('templates/templates.json');
@@ -160,11 +161,16 @@ async function handleSubmit(event, template) {
 
   const deeplink = `beckn://github.ondc/${generatedUUID}`;
 
+  // <p><strong>Deeplink:</strong> 
+  //     <span style="color: #007bff;">${deeplink}</span> 
+
   // Update UI with the generated deep link
   const contentElement = document.getElementById('template-content');
   contentElement.innerHTML = `
-    <p><strong>Deeplink:</strong> 
-      <span style="color: #007bff;">${deeplink}</span> 
+  <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align: center;">Deeplink:</p>
+      <p style="word-wrap: break-word; font-size: 16px; color: #007bff; margin-bottom: 10px;">
+        <a href="${deeplink}" target="_blank" style="text-decoration: none; color: #007bff; text-align: center;">${deeplink}</a>
+      </p>
       <button onclick="copyDeeplink('${deeplink}')">Copy</button>
     </p>
     <p>Enter your email to receive confirmation:</p>
@@ -174,16 +180,35 @@ async function handleSubmit(event, template) {
   const emailInput = document.createElement('input');
   emailInput.type = 'email';
   emailInput.placeholder = 'Enter your email';
-  emailInput.style.margin = '10px 0';
+  emailInput.style.cssText = `
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+  `;
 
   const submitEmailButton = document.createElement('button');
   submitEmailButton.textContent = 'Submit Email';
+  submitEmailButton.style.cssText = `
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  `;
+
   submitEmailButton.addEventListener('click', () => {
     if (!emailInput.value) {
       alert('Please enter a valid email ID.');
       return;
     }
-    alert('Email submitted successfully!');
+    // alert('Email submitted successfully!');
     contentElement.innerHTML = `<pre>${JSON.stringify(updatedTemplate, null, 2)}</pre>`;
   });
 
