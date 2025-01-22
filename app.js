@@ -167,13 +167,15 @@ async function handleSubmit(event, template) {
   // Update UI with the generated deep link
   const contentElement = document.getElementById('template-content');
   contentElement.innerHTML = `
-  <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align: center;">Deeplink:</p>
-      <p style="word-wrap: break-word; font-size: 16px; color: #007bff; margin-bottom: 10px;">
-        <a href="${deeplink}" target="_blank" style="text-decoration: none; color: #007bff; text-align: center;">${deeplink}</a>
-      </p>
-      <button onclick="copyDeeplink('${deeplink}')">Copy</button>
-    </p>
-    <p>Enter your email to receive confirmation:</p>
+  <p style="font-size: 18px; font-weight: bold; margin-bottom: 2px; ">Deeplink:</p>
+  <p style="word-wrap: break-word; font-size: 16px; color: #007bff; margin-bottom: 2px;">
+    <a href="${deeplink}" target="_blank" style="text-decoration: none; color: #007bff;">${deeplink}</a>
+  </p>
+  <button onclick="copyDeeplink('${deeplink}')"
+  style="padding: 8px 8px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;>
+  Copy
+  </button>
+  <p>Enter your email to receive confirmation:</p>
   `;
 
   // Email input field
