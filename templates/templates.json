@@ -23,44 +23,37 @@
                 "const": "search"
               },
               "bap_id": {
-                "type": "string",
-                "const" : "{{bap_id}}"
+                "type": "string"
               },
               "domain": {
                 "type": "string",
                 "enum": "{{domain}}"
               },
               "bap_uri": {
-                "type": "string",
-                "const": "{{bap_id}}"
+                "type": "string"
               },
               "country": {
                 "type": "string",
-                "enum": "{{country}}"
+                "enum": "{{country_code}}"
               },
               "timestamp": {
-                "type": "string",
-                "const": "{{timestamp}}"
+                "type": "string"
               },
               "message_id": {
-                "type": "string",
-                "const": "{{message_id}}"
+                "type": "string"
               },
               "core_version": {
                 "type": "string",
                 "const": "1.2.0"
               },
               "transaction_id": {
-                "type": "string",
-                "const": "{{transaction_id}}"
+                "type": "string"
               },
               "bpp_id": {
-                "type": "string",
-                "const": "{{bap_id}}"
+                "type": "string"
               },
               "bpp_uri": {
-                "type": "string",
-                "const": "{{bpp_uri}}"
+                "type": "string"
               }
             },
             "required": [
@@ -170,44 +163,37 @@
                 "const": "PT30S"
               },
               "city": {
-                "type": "string",
-                "enum": "{{city_code}}"
+                "type": "string"
               },
               "action": {
                 "type": "string",
                 "const": "search"
               },
               "bap_id": {
-                "type": "string",
-                "const" : "{{bap_id}}"
+                "type": "string"
               },
               "domain": {
                 "type": "string",
                 "enum": "{{domain}}"
               },
               "bap_uri": {
-                "type": "string",
-                "const": "{{bap_id}}"
+                "type": "string"
               },
               "country": {
-                "type": "string",
-                "enum": "{{country}}"
+                "type": "string"
               },
               "timestamp": {
-                "type": "string",
-                "const": "{{timestamp}}"
+                "type": "string"
               },
               "message_id": {
-                "type": "string",
-                "const": "{{message_id}}"
+                "type": "string"
               },
               "core_version": {
                 "type": "string",
                 "const": "1.2.0"
               },
               "transaction_id": {
-                "type": "string",
-                "const": "{{transaction_id}}"
+                "type": "string"
               },
               "bpp_id": {
                 "type": "string",
@@ -336,52 +322,42 @@
                 "const": "PT30S"
               },
               "city": {
-                "type": "string",
-                "enum": "{{city_code}}"
+                "type": "string"
               },
               "action": {
                 "type": "string",
                 "const": "search"
               },
               "bap_id": {
-                "type": "string",
-                "const" : "{{bap_id}}"
+                "type": "string"
               },
               "domain": {
-                "type": "string",
-                "enum": "{{domain}}"
+                "type": "string"
               },
               "bap_uri": {
-                "type": "string",
-                "const": "{{bap_id}}"
+                "type": "string"
               },
               "country": {
-                "type": "string",
-                "enum": "{{country}}"
+                "type": "string"
               },
               "timestamp": {
-                "type": "string",
-                "const": "{{timestamp}}"
+                "type": "string"
               },
               "message_id": {
-                "type": "string",
-                "const": "{{message_id}}"
+                "type": "string"
               },
               "core_version": {
                 "type": "string",
                 "const": "1.2.0"
               },
               "transaction_id": {
-                "type": "string",
-                "const": "{{transaction_id}}"
+                "type": "string"
               },
               "bpp_id": {
-                "type": "string",
-                "const": "{{bap_id}}"
+                "type": "string"
               },
               "bpp_uri": {
-                "type": "string",
-                "const": "{{bpp_uri}}"
+                "type": "string"
               }
             },
             "required": [
@@ -410,12 +386,10 @@
                     "type":"object",
                     "properties" : {
                       "id" : {
-                        "type":"string",
-                        "const": "{{item_id}}"
+                        "type":"string"
                       },
                       "parent_item_id" : {
-                        "type": "string",
-                        "const": "{{parent_item_id}}"
+                        "type": "string"
                       },
                       "descriptor" : {
                         "type" : "object",

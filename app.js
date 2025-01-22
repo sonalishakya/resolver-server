@@ -160,132 +160,36 @@ async function handleSubmit(event, template) {
 
   const deeplink = `beckn://github.ondc/${generatedUUID}`;
 
-  // Update UI with styled output
+  // Update UI with the generated deep link
   const contentElement = document.getElementById('template-content');
   contentElement.innerHTML = `
-    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-      <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Deeplink:</p>
-      <p style="word-wrap: break-word; font-size: 16px; color: #007bff; margin-bottom: 10px;">
-        <a href="${deeplink}" target="_blank" style="text-decoration: none; color: #007bff;">${deeplink}</a>
-      </p>
-      <button 
-        onclick="copyDeeplink('${deeplink}')"
-        style="padding: 8px 16px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
-        Copy
-      </button>
-    </div>
-    <div style="margin-top: 20px; text-align: center;">
-      <p style="font-size: 16px; font-weight: bold;">Enter your email to receive confirmation:</p>
-    </div>
+    <p><strong>Deeplink:</strong> 
+      <span style="color: #007bff;">${deeplink}</span> 
+      <button onclick="copyDeeplink('${deeplink}')">Copy</button>
+    </p>
+    <p>Enter your email to receive confirmation:</p>
   `;
 
   // Email input field
   const emailInput = document.createElement('input');
   emailInput.type = 'email';
   emailInput.placeholder = 'Enter your email';
-  emailInput.style.cssText = `
-    padding: 10px;
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-top: 10px;
-  `;
+  emailInput.style.margin = '10px 0';
 
   const submitEmailButton = document.createElement('button');
   submitEmailButton.textContent = 'Submit Email';
-  submitEmailButton.style.cssText = `
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-  `;
-
   submitEmailButton.addEventListener('click', () => {
     if (!emailInput.value) {
       alert('Please enter a valid email ID.');
       return;
     }
     alert('Email submitted successfully!');
-    contentElement.innerHTML += `<pre style="text-align: left; background: #f4f4f4; padding: 10px; border-radius: 5px;">${JSON.stringify(updatedTemplate, null, 2)}</pre>`;
+    contentElement.innerHTML = `<pre>${JSON.stringify(updatedTemplate, null, 2)}</pre>`;
   });
 
   contentElement.appendChild(emailInput);
   contentElement.appendChild(submitEmailButton);
 }
-
-// Function to copy the deeplink to clipboard
-function copyDeeplink(deeplink) {
-  navigator.clipboard.writeText(deeplink);
-  alert('Deeplink copied to clipboard!');
-}
-
-// async function handleSubmit(event, template) {
-//   event.preventDefault();
-
-//   const form = event.target;
-//   const formData = new FormData(form);
-
-//   // Deep copy of the base template to avoid mutation
-//   const updatedTemplate = JSON.parse(JSON.stringify(template.base_template));
-
-//   // Function to recursively replace placeholders with user input
-//   function populateTemplate(obj, formData) {
-//     for (let key in obj) {
-//       if (typeof obj[key] === "object" && obj[key] !== null) {
-//         populateTemplate(obj[key], formData);
-//       } else if (typeof obj[key] === "string" && obj[key].startsWith("{{")) {
-//         const fieldName = obj[key].replace(/[{}]/g, ""); // Remove {{ }}
-//         if (formData.has(fieldName)) {
-//           obj[key] = formData.get(fieldName); // Replace with user input
-//         }
-//       }
-//     }
-//   }
-
-//   // Populate the template with user input values
-//   populateTemplate(updatedTemplate.properties, formData);
-
-//   // Save the updated template to GitHub and generate UUID
-//   const generatedUUID = await saveToGitHub(updatedTemplate);
-
-//   const deeplink = `beckn://github.ondc/${generatedUUID}`;
-
-//   // Update UI with the generated deep link
-//   const contentElement = document.getElementById('template-content');
-//   contentElement.innerHTML = `
-//     <p><strong>Deeplink:</strong> 
-//       <span style="color: #007bff;">${deeplink}</span> 
-//       <button onclick="copyDeeplink('${deeplink}')">Copy</button>
-//     </p>
-//     <p>Enter your email to receive confirmation:</p>
-//   `;
-
-//   // Email input field
-//   const emailInput = document.createElement('input');
-//   emailInput.type = 'email';
-//   emailInput.placeholder = 'Enter your email';
-//   emailInput.style.margin = '10px 0';
-
-//   const submitEmailButton = document.createElement('button');
-//   submitEmailButton.textContent = 'Submit Email';
-//   submitEmailButton.addEventListener('click', () => {
-//     if (!emailInput.value) {
-//       alert('Please enter a valid email ID.');
-//       return;
-//     }
-//     alert('Email submitted successfully!');
-//     contentElement.innerHTML = `<pre>${JSON.stringify(updatedTemplate, null, 2)}</pre>`;
-//   });
-
-//   contentElement.appendChild(emailInput);
-//   contentElement.appendChild(submitEmailButton);
-// }
 
 // Populate the cards with template names
 async function populateCards() {
